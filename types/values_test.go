@@ -17,9 +17,9 @@ func TestValue(t *testing.T) {
 	for _, test := range []struct {
 		name   string
 		v      types.Value
-		id     typeid.Id
+		id     typeid.ID
 		size   int
-		upcast typeid.Id
+		upcast typeid.ID
 	}{
 		{"Uint8", types.Uint8(10), typeid.Uint8, 1, typeid.Uint64},
 		{"Uint16", types.Uint16(10), typeid.Uint16, 2, typeid.Uint64},
@@ -35,9 +35,9 @@ func TestValue(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			t.Parallel()
 
-			assert.Equal(t, test.id, test.v.Id())
+			assert.Equal(t, test.id, test.v.ID())
 			assert.Equal(t, test.size, test.v.Size())
-			assert.Equal(t, test.upcast, test.v.Upcast().Id())
+			assert.Equal(t, test.upcast, test.v.Upcast().ID())
 		})
 	}
 
@@ -60,14 +60,14 @@ func TestDowncast(t *testing.T) {
 	)
 
 	nilErr := testerr.Nil()
-	castErr := func(from, to typeid.Id) testerr.ExpectedError {
+	castErr := func(from, to typeid.ID) testerr.ExpectedError {
 		return testerr.Is(types.CastError{From: from, To: to})
 	}
 
 	for _, test := range []struct {
 		name     string
 		value    types.StackValue
-		to       typeid.Id
+		to       typeid.ID
 		expected types.Value
 		err      testerr.ExpectedError
 	}{
@@ -191,7 +191,7 @@ func TestDowncast(t *testing.T) {
 			actual, err := test.value.Downcast(test.to)
 			test.err.Require(t, err)
 			if actual != nil && test.expected != nil {
-				require.Equal(t, test.expected.Id(), actual.Id())
+				require.Equal(t, test.expected.ID(), actual.ID())
 			}
 			require.Equal(t, test.expected, actual)
 		})

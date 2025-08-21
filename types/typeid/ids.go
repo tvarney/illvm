@@ -1,9 +1,9 @@
 package typeid
 
-type Id uint8
+type ID uint8
 
 const (
-	Void Id = iota
+	Void ID = iota
 	Uint8
 	Uint16
 	Uint32
@@ -25,7 +25,7 @@ const (
 	// Closure?
 )
 
-func (i Id) String() string {
+func (i ID) String() string {
 	switch i {
 	case Void:
 		return "void"

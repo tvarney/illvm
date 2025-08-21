@@ -7,7 +7,7 @@ import (
 	"github.com/tvarney/illvm/types/typeid"
 )
 
-func TestId(t *testing.T) {
+func TestID(t *testing.T) {
 	t.Parallel()
 
 	t.Run("String", func(t *testing.T) {
@@ -15,7 +15,7 @@ func TestId(t *testing.T) {
 
 		for _, test := range []struct {
 			name     string
-			id       typeid.Id
+			id       typeid.ID
 			expected string
 		}{
 			{"Void", typeid.Void, "void"},
@@ -37,7 +37,7 @@ func TestId(t *testing.T) {
 			{"Class", typeid.Class, "class"},
 			{"Function", typeid.Function, "function"},
 			{"Method", typeid.Method, "method"},
-			{"Unknown", typeid.Id(255), "unknown"},
+			{"Unknown", typeid.ID(255), "unknown"},
 		} {
 			t.Run(test.name, func(t *testing.T) {
 				t.Parallel()

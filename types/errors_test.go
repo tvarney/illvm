@@ -13,8 +13,8 @@ func TestCastError(t *testing.T) {
 
 	for _, test := range []struct {
 		name     string
-		from     typeid.Id
-		to       typeid.Id
+		from     typeid.ID
+		to       typeid.ID
 		expected string
 	}{
 		{"Int8ToInt16", typeid.Int8, typeid.Int16, "unable to cast int8 to int16"},

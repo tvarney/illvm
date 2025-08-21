@@ -9,7 +9,7 @@ import (
 // Values must be able to return their ID and be upcast to a StackValue. They
 // are used inside struct and class definitions.
 type Value interface {
-	Id() typeid.Id
+	ID() typeid.ID
 	Size() int
 	Upcast() StackValue
 }
@@ -18,5 +18,5 @@ type Value interface {
 type StackValue interface {
 	Value
 
-	Downcast(to typeid.Id) (Value, error)
+	Downcast(to typeid.ID) (Value, error)
 }

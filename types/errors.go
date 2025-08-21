@@ -9,8 +9,8 @@ import (
 // CastError is an error type which indicates that casting from one value type
 // to another was not possible.
 type CastError struct {
-	From typeid.Id
-	To   typeid.Id
+	From typeid.ID
+	To   typeid.ID
 }
 
 func (e CastError) Error() string {

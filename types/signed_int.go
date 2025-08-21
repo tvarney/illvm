@@ -10,7 +10,7 @@ import (
 // Upcasting an Int8 will return an Int64.
 type Int8 int8
 
-func (i Int8) Id() typeid.Id {
+func (i Int8) ID() typeid.ID {
 	return typeid.Int8
 }
 
@@ -28,7 +28,7 @@ func (i Int8) Upcast() StackValue {
 // Upcasting an Int16 will return an Int64.
 type Int16 int16
 
-func (i Int16) Id() typeid.Id {
+func (i Int16) ID() typeid.ID {
 	return typeid.Int16
 }
 
@@ -46,7 +46,7 @@ func (i Int16) Upcast() StackValue {
 // Upcasting an Int32 will return an Int64.
 type Int32 int32
 
-func (i Int32) Id() typeid.Id {
+func (i Int32) ID() typeid.ID {
 	return typeid.Int32
 }
 
@@ -64,7 +64,7 @@ func (i Int32) Upcast() StackValue {
 // the stack.
 type Int64 int64
 
-func (i Int64) Id() typeid.Id {
+func (i Int64) ID() typeid.ID {
 	return typeid.Int64
 }
 
@@ -76,7 +76,7 @@ func (i Int64) Upcast() StackValue {
 	return i
 }
 
-func (i Int64) Downcast(to typeid.Id) (Value, error) {
+func (i Int64) Downcast(to typeid.ID) (Value, error) {
 	switch to {
 	case typeid.Uint8:
 		return (Uint8)(i), nil

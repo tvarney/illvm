@@ -10,7 +10,7 @@ import (
 // Upcasting a Uint8 will return a Uint64.
 type Uint8 uint8
 
-func (u Uint8) Id() typeid.Id {
+func (u Uint8) ID() typeid.ID {
 	return typeid.Uint8
 }
 
@@ -28,7 +28,7 @@ func (u Uint8) Upcast() StackValue {
 // Upcasting a Uint16 will return a Uint64.
 type Uint16 uint16
 
-func (u Uint16) Id() typeid.Id {
+func (u Uint16) ID() typeid.ID {
 	return typeid.Uint16
 }
 
@@ -46,7 +46,7 @@ func (u Uint16) Upcast() StackValue {
 // Upcasting a Uint32 will return a Uint64.
 type Uint32 uint32
 
-func (u Uint32) Id() typeid.Id {
+func (u Uint32) ID() typeid.ID {
 	return typeid.Uint32
 }
 
@@ -64,7 +64,7 @@ func (u Uint32) Upcast() StackValue {
 // the stack.
 type Uint64 uint64
 
-func (u Uint64) Id() typeid.Id {
+func (u Uint64) ID() typeid.ID {
 	return typeid.Uint64
 }
 
@@ -76,7 +76,7 @@ func (u Uint64) Upcast() StackValue {
 	return u
 }
 
-func (u Uint64) Downcast(to typeid.Id) (Value, error) {
+func (u Uint64) Downcast(to typeid.ID) (Value, error) {
 	switch to {
 	case typeid.Uint8:
 		return (Uint8)(u), nil

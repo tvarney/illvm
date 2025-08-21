@@ -6,7 +6,7 @@ import (
 
 type Float32 float32
 
-func (f Float32) Id() typeid.Id {
+func (f Float32) ID() typeid.ID {
 	return typeid.Float32
 }
 
@@ -20,7 +20,7 @@ func (f Float32) Upcast() StackValue {
 
 type Float64 float64
 
-func (f Float64) Id() typeid.Id {
+func (f Float64) ID() typeid.ID {
 	return typeid.Float64
 }
 
@@ -32,7 +32,7 @@ func (f Float64) Upcast() StackValue {
 	return f
 }
 
-func (f Float64) Downcast(to typeid.Id) (Value, error) {
+func (f Float64) Downcast(to typeid.ID) (Value, error) {
 	switch to {
 	case typeid.Uint8:
 		return (Uint8)(f), nil
