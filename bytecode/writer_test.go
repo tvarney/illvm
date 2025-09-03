@@ -2,7 +2,6 @@ package bytecode_test
 
 import (
 	"bytes"
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -20,7 +19,6 @@ func TestWriter(t *testing.T) {
 	t.Run("WriteU56", testWriterWriteU56)
 	t.Run("WriteU64", testWriterWriteU64)
 	t.Run("WriteVarInt", testWriterWriteVarInt)
-
 }
 
 func testWriterWriteU8(t *testing.T) {
@@ -42,7 +40,7 @@ func testWriterWriteU8(t *testing.T) {
 			count, err := w.WriteU8(test.value)
 			require.NoError(t, err)
 			require.Equal(t, 1, count, "must always return that 1 byte was written")
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}
@@ -68,7 +66,7 @@ func testWriterWriteU16(t *testing.T) {
 			count, err := w.WriteU16(test.value)
 			require.NoError(t, err)
 			require.Equal(t, 2, count, "must always return that 2 bytes were written")
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}
@@ -96,7 +94,7 @@ func testWriterWriteU24(t *testing.T) {
 			count, err := w.WriteU24(test.value)
 			require.NoError(t, err)
 			require.Equal(t, 3, count, "must always return that 3 bytes were written")
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}
@@ -124,7 +122,7 @@ func testWriterWriteU32(t *testing.T) {
 			count, err := w.WriteU32(test.value)
 			require.NoError(t, err)
 			require.Equal(t, 4, count, "must always return that 4 bytes were written")
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}
@@ -154,7 +152,7 @@ func testWriterWriteU40(t *testing.T) {
 			count, err := w.WriteU40(test.value)
 			require.NoError(t, err)
 			require.Equal(t, 5, count, "must always return that 5 bytes were written")
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}
@@ -185,7 +183,7 @@ func testWriterWriteU48(t *testing.T) {
 			count, err := w.WriteU48(test.value)
 			require.NoError(t, err)
 			require.Equal(t, 6, count, "must always return that 6 bytes were written")
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}
@@ -217,7 +215,7 @@ func testWriterWriteU56(t *testing.T) {
 			count, err := w.WriteU56(test.value)
 			require.NoError(t, err)
 			require.Equal(t, 7, count, "must always return that 7 bytes were written")
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}
@@ -249,7 +247,7 @@ func testWriterWriteU64(t *testing.T) {
 			count, err := w.WriteU64(test.value)
 			require.NoError(t, err)
 			require.Equal(t, 8, count, "must always return that 8 bytes were written")
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}
@@ -274,9 +272,9 @@ func testWriterWriteVarInt(t *testing.T) {
 			require.NoError(t, err)
 			require.Equal(
 				t, len(test.expected), count,
-				fmt.Sprintf("must write %d bytes but wrote %d", len(test.expected), count),
+				"must write %d bytes but wrote %d", len(test.expected), count,
 			)
-			require.Equal(t, count, len(buf.Bytes()), "must return the count of bytes written")
+			require.Len(t, buf.Bytes(), count, "must return the count of bytes written")
 			require.Equal(t, test.expected, buf.Bytes())
 		})
 	}

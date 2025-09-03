@@ -23,6 +23,7 @@ func TestCastError(t *testing.T) {
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			t.Parallel()
+
 			e := types.CastError{From: test.from, To: test.to}
 			require.Equal(t, test.expected, e.Error())
 		})

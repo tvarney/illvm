@@ -19,7 +19,7 @@ func (i Int8) Size() int {
 }
 
 func (i Int8) Upcast() StackValue {
-	return (Int64)(i)
+	return Int64(i)
 }
 
 // Int16 is a 16-bit signed integer.
@@ -37,7 +37,7 @@ func (i Int16) Size() int {
 }
 
 func (i Int16) Upcast() StackValue {
-	return (Int64)(i)
+	return Int64(i)
 }
 
 // Int32 is a 32-bit signed integer.
@@ -55,7 +55,7 @@ func (i Int32) Size() int {
 }
 
 func (i Int32) Upcast() StackValue {
-	return (Int64)(i)
+	return Int64(i)
 }
 
 // Int64 is a 64-bit signed integer.
@@ -79,26 +79,26 @@ func (i Int64) Upcast() StackValue {
 func (i Int64) Downcast(to typeid.ID) (Value, error) {
 	switch to {
 	case typeid.Uint8:
-		return (Uint8)(i), nil
+		return Uint8(i), nil
 	case typeid.Uint16:
-		return (Uint16)(i), nil
+		return Uint16(i), nil
 	case typeid.Uint32:
-		return (Uint32)(i), nil
+		return Uint32(i), nil
 	case typeid.Uint64:
-		return (Uint64)(i), nil
+		return Uint64(i), nil
 	case typeid.Int8:
-		return (Int8)(i), nil
+		return Int8(i), nil
 	case typeid.Int16:
-		return (Int16)(i), nil
+		return Int16(i), nil
 	case typeid.Int32:
-		return (Int32)(i), nil
+		return Int32(i), nil
 	case typeid.Int64:
-		return (Int64)(i), nil
+		return i, nil
 	case typeid.Float32:
-		return (Float32)(i), nil
+		return Float32(i), nil
 	case typeid.Float64:
-		return (Float64)(i), nil
+		return Float64(i), nil
+	default:
+		return nil, CastError{From: typeid.Int64, To: to}
 	}
-
-	return nil, CastError{From: typeid.Int64, To: to}
 }

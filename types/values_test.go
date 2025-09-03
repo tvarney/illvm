@@ -40,7 +40,6 @@ func TestValue(t *testing.T) {
 			assert.Equal(t, test.upcast, test.v.Upcast().ID())
 		})
 	}
-
 }
 
 func TestDowncast(t *testing.T) {
@@ -105,6 +104,8 @@ func TestDowncast(t *testing.T) {
 
 		// Int64: Uint8
 		{"Int64/Uint8/Normal", i64(12), Uint8, u8(12), nilErr},
+		{"Int64/Uint8/Underflow", i64(-2), Uint8, u8(254), nilErr},
+		{"Int64/Uint8/Overflow", i64(300), Uint8, u8(44), nilErr},
 		// Int64: Uint16
 		{"Int64/Uint16/Normal", i64(1030), Uint16, u16(1030), nilErr},
 		// Int64: Uint32
@@ -190,53 +191,55 @@ func TestDowncast(t *testing.T) {
 
 			actual, err := test.value.Downcast(test.to)
 			test.err.Require(t, err)
+
 			if actual != nil && test.expected != nil {
 				require.Equal(t, test.expected.ID(), actual.ID())
 			}
+
 			require.Equal(t, test.expected, actual)
 		})
 	}
 }
 
 // Helper functions
-//=================
+// ================
 
 func f64(v float64) types.Float64 {
-	return (types.Float64)(v)
+	return types.Float64(v)
 }
 
 func f32(v float32) types.Float32 {
-	return (types.Float32)(v)
+	return types.Float32(v)
 }
 
 func u8(v uint8) types.Uint8 {
-	return (types.Uint8)(v)
+	return types.Uint8(v)
 }
 
 func u16(v uint16) types.Uint16 {
-	return (types.Uint16)(v)
+	return types.Uint16(v)
 }
 
 func u32(v uint32) types.Uint32 {
-	return (types.Uint32)(v)
+	return types.Uint32(v)
 }
 
 func u64(v uint64) types.Uint64 {
-	return (types.Uint64)(v)
+	return types.Uint64(v)
 }
 
 func i8(v int8) types.Int8 {
-	return (types.Int8)(v)
+	return types.Int8(v)
 }
 
 func i16(v int16) types.Int16 {
-	return (types.Int16)(v)
+	return types.Int16(v)
 }
 
 func i32(v int32) types.Int32 {
-	return (types.Int32)(v)
+	return types.Int32(v)
 }
 
 func i64(v int64) types.Int64 {
-	return (types.Int64)(v)
+	return types.Int64(v)
 }

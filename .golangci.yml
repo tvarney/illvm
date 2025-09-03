@@ -1,0 +1,110 @@
+version: "2"
+
+run:
+  timeout: 2m
+  relative-path-mode: gomod
+linters:
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - containedctx
+    - contextcheck
+    - copyloopvar
+    #- cyclop
+    - decorder
+    - dogsled
+    - dupl
+    - dupword
+    - durationcheck
+    - embeddedstructfieldcheck
+    - err113
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
+    - exhaustruct
+    - exptostd
+    - fatcontext
+    - forcetypeassert
+    - funcorder
+    - funlen
+    - gocheckcompilerdirectives
+    - gochecknoglobals
+    - gochecknoinits
+    - gochecksumtype
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - godox
+    - goprintffuncname
+    - govet
+    - grouper
+    - iface
+    - importas
+    - inamedparam
+    - ineffassign
+    - interfacebloat
+    - intrange
+    - lll
+    - maintidx
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnesserr
+    - nilnil
+    - noctx
+    - nolintlint
+    - paralleltest
+    - perfsprint
+    - prealloc
+    - predeclared
+    - reassign
+    - recvcheck
+    - staticcheck
+    - tagalign
+    - tagliatelle
+    - testifylint
+    - testpackage
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    - usetesting
+    - wastedassign
+    - whitespace
+    - wsl_v5
+  settings:
+    exhaustive:
+      default-signifies-exhaustive: true
+    gocritic:
+      enabled-tags:
+        - diagnostic
+        - style
+        - performance
+    grouper:
+      const-require-grouping: true
+      const-require-single-const: true
+      import-require-grouping: true
+      import-require-single-import: true
+    lll:
+      line-length: 120
+      tab-width: 4
+    nakedret:
+      max-func-lines: 4
+  exclusions:
+    rules:
+      # Exclude these linters on any test file
+      - path: "_test\\.go"
+        linters:
+        - funlen
+formatters:
+  enable:
+    - gofumpt
+    - goimports
