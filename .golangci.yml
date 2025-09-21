@@ -103,7 +103,10 @@ linters:
       # Exclude these linters on any test file
       - path: "_test\\.go"
         linters:
+        - dupl
+        - exhaustruct
         - funlen
+        - gochecknoglobals
 formatters:
   enable:
     - gofumpt
