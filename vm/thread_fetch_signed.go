@@ -11,6 +11,41 @@ const (
 	Int56SignExtend  = 0xFF00000000000000
 )
 
+// FetchSigned reads count bytes from the bytecode and returns it as an int64.
+//
+// If there are not enough bytes in the bytecode to read count bytes, this
+// function will return a FetchNotEnoughBytesError.
+//
+// The value of count must be from 1 to 8 inclusive. Values less than 1 or
+// greater than 8 will result in this function returning an
+// ImmediateFetchSizeError.
+func (t *Thread) FetchSigned(count int) (int64, error) {
+	switch count {
+	case 1:
+		v, err := t.FetchI8()
+		return int64(v), err
+	case 2:
+		v, err := t.FetchI16()
+		return int64(v), err
+	case 3:
+		v, err := t.FetchI24()
+		return int64(v), err
+	case 4:
+		v, err := t.FetchI32()
+		return int64(v), err
+	case 5:
+		return t.FetchI40()
+	case 6:
+		return t.FetchI48()
+	case 7:
+		return t.FetchI56()
+	case 8:
+		return t.FetchI64()
+	default:
+		return 0, ImmediateFetchSizeError{Bytes: count}
+	}
+}
+
 // FetchI8 reads a single byte from the bytecode and returns it as an int8.
 //
 // If there aren't enough bytes in the bytecode to read 1 byte this function
