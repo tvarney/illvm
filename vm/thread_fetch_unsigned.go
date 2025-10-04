@@ -1,5 +1,7 @@
 package vm
 
+import "github.com/tvarney/illvm/vm/vmath"
+
 // FetchUnsigned reads count bytes from the bytecode and returns it as a uint64.
 //
 // If there are not enough bytes in the bytecode to read count bytes this
@@ -62,7 +64,7 @@ func (t *Thread) FetchU16() (uint16, error) {
 		return 0, FetchNotEnoughBytesError{Bytes: 2}
 	}
 
-	val := ((uint16(t.Data[t.PC])) << 8) + (uint16(t.Data[t.PC+1]))
+	val := vmath.U16FromBytes(t.Data[t.PC], t.Data[t.PC+1])
 	t.PC += 2
 
 	return val, nil
@@ -77,9 +79,7 @@ func (t *Thread) FetchU24() (uint32, error) {
 		return 0, FetchNotEnoughBytesError{Bytes: 3}
 	}
 
-	val := ((uint32(t.Data[t.PC])) << 16) + ((uint32(t.Data[t.PC+1])) << 8) +
-		(uint32(t.Data[t.PC+2]))
-
+	val := vmath.U24FromBytes(t.Data[t.PC], t.Data[t.PC+1], t.Data[t.PC+2])
 	t.PC += 3
 
 	return val, nil
@@ -94,9 +94,9 @@ func (t *Thread) FetchU32() (uint32, error) {
 		return 0, FetchNotEnoughBytesError{Bytes: 4}
 	}
 
-	val := ((uint32(t.Data[t.PC])) << 24) + ((uint32(t.Data[t.PC+1])) << 16) +
-		((uint32(t.Data[t.PC+2])) << 8) + (uint32(t.Data[t.PC+3]))
-
+	val := vmath.U32FromBytes(
+		t.Data[t.PC], t.Data[t.PC+1], t.Data[t.PC+2], t.Data[t.PC+3],
+	)
 	t.PC += 4
 
 	return val, nil
@@ -111,10 +111,10 @@ func (t *Thread) FetchU40() (uint64, error) {
 		return 0, FetchNotEnoughBytesError{Bytes: 5}
 	}
 
-	val := ((uint64(t.Data[t.PC])) << 32) + ((uint64(t.Data[t.PC+1])) << 24) +
-		((uint64(t.Data[t.PC+2])) << 16) + ((uint64(t.Data[t.PC+3])) << 8) +
-		(uint64(t.Data[t.PC+4]))
-
+	val := vmath.U40FromBytes(
+		t.Data[t.PC], t.Data[t.PC+1], t.Data[t.PC+2], t.Data[t.PC+3],
+		t.Data[t.PC+4],
+	)
 	t.PC += 5
 
 	return val, nil
@@ -129,10 +129,10 @@ func (t *Thread) FetchU48() (uint64, error) {
 		return 0, FetchNotEnoughBytesError{Bytes: 6}
 	}
 
-	val := ((uint64(t.Data[t.PC])) << 40) + ((uint64(t.Data[t.PC+1])) << 32) +
-		((uint64(t.Data[t.PC+2])) << 24) + ((uint64(t.Data[t.PC+3])) << 16) +
-		((uint64(t.Data[t.PC+4])) << 8) + (uint64(t.Data[t.PC+5]))
-
+	val := vmath.U48FromBytes(
+		t.Data[t.PC], t.Data[t.PC+1], t.Data[t.PC+2], t.Data[t.PC+3],
+		t.Data[t.PC+4], t.Data[t.PC+5],
+	)
 	t.PC += 6
 
 	return val, nil
@@ -147,11 +147,10 @@ func (t *Thread) FetchU56() (uint64, error) {
 		return 0, FetchNotEnoughBytesError{Bytes: 7}
 	}
 
-	val := ((uint64(t.Data[t.PC])) << 48) + ((uint64(t.Data[t.PC+1])) << 40) +
-		((uint64(t.Data[t.PC+2])) << 32) + ((uint64(t.Data[t.PC+3])) << 24) +
-		((uint64(t.Data[t.PC+4])) << 16) + ((uint64(t.Data[t.PC+5])) << 8) +
-		(uint64(t.Data[t.PC+6]))
-
+	val := vmath.U56FromBytes(
+		t.Data[t.PC], t.Data[t.PC+1], t.Data[t.PC+2], t.Data[t.PC+3],
+		t.Data[t.PC+4], t.Data[t.PC+5], t.Data[t.PC+6],
+	)
 	t.PC += 7
 
 	return val, nil
@@ -166,11 +165,10 @@ func (t *Thread) FetchU64() (uint64, error) {
 		return 0, FetchNotEnoughBytesError{Bytes: 8}
 	}
 
-	val := ((uint64(t.Data[t.PC])) << 56) + ((uint64(t.Data[t.PC+1])) << 48) +
-		((uint64(t.Data[t.PC+2])) << 40) + ((uint64(t.Data[t.PC+3])) << 32) +
-		((uint64(t.Data[t.PC+4])) << 24) + ((uint64(t.Data[t.PC+5])) << 16) +
-		((uint64(t.Data[t.PC+6])) << 8) + (uint64(t.Data[t.PC+7]))
-
+	val := vmath.U64FromBytes(
+		t.Data[t.PC], t.Data[t.PC+1], t.Data[t.PC+2], t.Data[t.PC+3],
+		t.Data[t.PC+4], t.Data[t.PC+5], t.Data[t.PC+6], t.Data[t.PC+7],
+	)
 	t.PC += 8
 
 	return val, nil
